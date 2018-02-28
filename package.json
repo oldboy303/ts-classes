@@ -1,16 +1,19 @@
 {
-  "name": "typescript",
+  "name": "typescript-complete",
   "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
+  "description": "Complete TypeScript Course",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "typescript",
+    "course"
+  ],
+  "author": "Maximilian Schwarzmueller",
+  "license": "MIT",
   "devDependencies": {
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.2.2"
   }
 }

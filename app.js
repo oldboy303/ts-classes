@@ -1,92 +1,108 @@
-"use strict";
-// string
-var myName = 'Max';
-// myName = 28;
-// number
-var myAge = 27;
-// myAge = 'Max';
-// boolean
-var hasHobbies = false;
-// hasHobbies = 1;
-// assign types
-var myRealAge;
-myRealAge = 27;
-// myRealAge = '27';
-// array
-var hobbies = ["Cooking", "Sports"];
-hobbies = [100];
-// hobbies = 100;
-// tuples
-var address = ["Superstreet", 99];
-// enum
-var Color;
-(function (Color) {
-    Color[Color["Gray"] = 0] = "Gray";
-    Color[Color["Green"] = 100] = "Green";
-    Color[Color["Blue"] = 2] = "Blue"; // 2
-})(Color || (Color = {}));
-var myColor = Color.Blue;
-console.log(myColor);
-// any
-var car = "BMW";
-console.log(car);
-car = { brand: "BMW", series: 3 };
-console.log(car);
-// functions
-function returnMyName() {
-    return myName;
-}
-console.log(returnMyName());
-// void
-function sayHello() {
-    console.log("Hello!");
-}
-// argument types
-function multiply(value1, value2) {
-    return value1 * value2;
-}
-// console.log(multiply(2, 'Max'));
-console.log(multiply(10, 2));
-// function types
-var myMultiply;
-// myMultiply = sayHello;
-// myMultiply();
-myMultiply = multiply;
-console.log(myMultiply(5, 2));
-// objects
-var userData = {
-    name: "Max",
-    age: 27
-};
-// userData = {
-//     a: "Hello",
-//     b: 22
-// };
-// complex object
-var complex = {
-    data: [100, 3.99, 10],
-    output: function (all) {
-        return this.data;
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var Person = /** @class */ (function () {
+    function Person(name, username) {
+        this.username = username;
+        this.age = 27;
+        this.name = name;
     }
-};
-var complex2 = {
-    data: [100, 3.99, 10],
-    output: function (all) {
-        return this.data;
+    Person.prototype.printAge = function () {
+        console.log(this.age);
+        this.setType("Old Guy");
+    };
+    Person.prototype.setType = function (type) {
+        this.type = type;
+        console.log(this.type);
+    };
+    return Person;
+}());
+var person = new Person("San", "san");
+console.log(person.name, person.username);
+person.printAge();
+// person.setType("Cool guy"); // Won't work with private method
+// Inheritance
+var San = /** @class */ (function (_super) {
+    __extends(San, _super);
+    // name = "Max";
+    function San(username) {
+        var _this = _super.call(this, "San", username) || this;
+        _this.age = 31;
+        return _this;
     }
-};
-// union types
-var myRealRealAge = 27;
-myRealRealAge = "27";
-// myRealRealAge = true;
-// check types
-var finalValue = 30;
-if (typeof finalValue == "number") {
-    console.log("Final value is a number");
-}
-// never
-function neverReturns() {
-    throw new Error('It went pear shaped');
-}
-// nullable w/ "strictNullChecks" in tsconfig.json
-var canBeNull = 12;
+    return San;
+}(Person));
+var san = new San("san");
+console.log(san);
+// Getters & Setters
+var Plant = /** @class */ (function () {
+    function Plant() {
+        this._species = "Default";
+    }
+    Object.defineProperty(Plant.prototype, "species", {
+        get: function () {
+            return this._species;
+        },
+        set: function (value) {
+            if (value.length > 3) {
+                this._species = value;
+            }
+            else {
+                this._species = "Default";
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Plant;
+}());
+var plant = new Plant();
+console.log(plant.species);
+plant.species = "AB";
+console.log(plant.species);
+plant.species = "Green Plant";
+console.log(plant.species);
+// Static Properties & Methods
+var Helpers = /** @class */ (function () {
+    function Helpers() {
+    }
+    Helpers.calcCircumference = function (diameter) {
+        return this.PI * diameter;
+    };
+    Helpers.PI = 3.14;
+    return Helpers;
+}());
+console.log(2 * Helpers.PI);
+console.log(Helpers.calcCircumference(8));
+// Abstract Classes
+var Project = /** @class */ (function () {
+    function Project() {
+        this.projectName = "Default";
+        this.budget = 1000;
+    }
+    Project.prototype.calcBudget = function () {
+        return this.budget * 2;
+    };
+    return Project;
+}());
+var ITProject = /** @class */ (function (_super) {
+    __extends(ITProject, _super);
+    function ITProject() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ITProject.prototype.changeName = function (name) {
+        this.projectName = name;
+    };
+    return ITProject;
+}(Project));
+var newProject = new ITProject();
+console.log(newProject);
+newProject.changeName("Super IT Project");
+console.log(newProject);
