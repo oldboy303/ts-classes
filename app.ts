@@ -108,4 +108,5 @@ class OnlyOne {
     }
 }
 // let wrong = new OnlyOne('Another one');
-let right = OnlyOne.getInstance
+let right = OnlyOne.getInstance();
+console.log(right.name);
