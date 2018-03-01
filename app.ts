@@ -91,3 +91,21 @@ let newProject = new ITProject();
 console.log(newProject);
 newProject.changeName("Super IT Project");
 console.log(newProject);
+
+// private constructor and singletons
+// readonly
+class OnlyOne {
+    private static instance: OnlyOne;
+    public readonly name: string;
+    private constructor(name: string) {
+        this.name = name;
+    }
+    static getInstance() {
+        if(!OnlyOne.instance) {
+            OnlyOne.instance = new OnlyOne('The one and only');
+        }
+        return OnlyOne.instance;
+    }
+}
+// let wrong = new OnlyOne('Another one');
+let right = OnlyOne.getInstance
