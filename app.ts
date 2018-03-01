@@ -1,7 +1,7 @@
 class Person {
     name: string;
     private type: string;
-    protected age: number = 27;
+    protected age: number = 42;
 
     constructor(name: string, public username: string) {
         this.name = name;
@@ -29,7 +29,7 @@ class San extends Person {
 
     constructor(username: string) {
         super("San", username);
-        this.age = 31;
+        this.age = 42;
     }
 }
 const san = new San("san");
